@@ -31,48 +31,21 @@ public class Game extends JPanel {
     int y = 0;
     int xa = 1;
     int ya = 1;
-
-    public class Bird {
-        private int loc_x;
-        private int loc_y;
-        private int xa;
-        private int ya;
-        private int size_x;
-        private int size_y;
-
-        public void Bird(int loc_x, int loc_y, int xa, int ya, int size_x, int size_y) {
-            this.loc_x = loc_x;
-            this.loc_y = loc_y;
-            this.xa = xa;
-            this.ya = ya;
-            this.size_x = size_x;
-            this.size_y = size_y;
-        }
     
+    Bird bird1 = new Bird(0, 0, 1, 1, 30, 30);
+        
 
-    public void move(int width, int height) {
-        if (x >= (width - size_x) || loc_x < 0) {
-            xa = xa * -1;
-        }
-        if (y >= (height - size_y) || loc_y < 0) {
-            ya = ya * -1;
-
-        }
-        loc_x = loc_x + (1 * xa);
-        loc_y = loc_y + (1 * ya);
-    }
-}
-
-public void moveBall() {
-        if (x >= (this.getWidth() - (OBJECT_1_SIZE_X)) || x < 0){
-            xa = xa * -1;
-        }
-        if (y >= (this.getHeight() - (OBJECT_1_SIZE_Y)) || y < 0){
-            ya = ya * -1;
-            
-        }
-        x = x + (1 * xa);
-        y = y + (1 * ya);
+    public void moveBall() {
+        bird1.move(this.getWidth(), this.getHeight());
+//        if (x >= (this.getWidth() - (OBJECT_1_SIZE_X)) || x < 0){
+//            xa = xa * -1;
+//        }
+//        if (y >= (this.getHeight() - (OBJECT_1_SIZE_Y)) || y < 0){
+//            ya = ya * -1;
+//            
+//        }
+//        x = x + (1 * xa);
+//        y = y + (1 * ya);
 
     }
 
@@ -83,7 +56,7 @@ public void moveBall() {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setColor(Color.red);
-        g2d.fillOval(x, y, OBJECT_1_SIZE_X, OBJECT_1_SIZE_Y);
+        g2d.fillOval(bird1.loc_x, bird1.loc_y, bird1.size_x, bird1.size_y);
     }
 
     public static void main(String[] args) {
@@ -93,8 +66,6 @@ public void moveBall() {
         frame.setSize(CANVAS_SIZE_X, CANVAS_SIZE_Y);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        Bird bird1 = new Bird(0, 0, 1, 1, 30, 30);
         
         while (true) {
             game.moveBall();
