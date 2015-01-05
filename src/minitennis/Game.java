@@ -8,8 +8,9 @@ package minitennis;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.List;
 import java.awt.RenderingHints;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -31,13 +32,19 @@ public class Game extends JPanel {
     int y = 0;
     int xa = 1;
     int ya = 1;
-    
-    Bird bird1 = new Bird(0, 0, 1, 1, 30, 30);
-        
+
+    List<Bird> birdcage;
+
+    public Game() {
+        this.birdcage = new ArrayList<>();
+        this.birdcage.add(new Bird(100, 200, 0.1, 2, 30, 30));
+        this.birdcage.add(new Bird(50, 50, 1.2, 2, 15, 15));
+    }
 
     public void moveBall() {
-        bird1.move(this.getWidth(), this.getHeight());
-//        if (x >= (this.getWidth() - (OBJECT_1_SIZE_X)) || x < 0){
+        birdcage.stream().forEach((bird) -> {
+            bird.move(this.getWidth(), this.getHeight());
+        });//        if (x >= (this.getWidth() - (OBJECT_1_SIZE_X)) || x < 0){
 //            xa = xa * -1;
 //        }
 //        if (y >= (this.getHeight() - (OBJECT_1_SIZE_Y)) || y < 0){
@@ -46,17 +53,18 @@ public class Game extends JPanel {
 //        }
 //        x = x + (1 * xa);
 //        y = y + (1 * ya);
-
     }
 
     @Override
-        public void paint(Graphics g) {
+    public void paint(Graphics g) {
         super.paint(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setColor(Color.red);
-        g2d.fillOval(bird1.loc_x, bird1.loc_y, bird1.size_x, bird1.size_y);
+        birdcage.stream().forEach((bird) -> {
+            g2d.fillOval(bird.getLoc_x(), bird.getLoc_y(), bird.size_x, bird.size_y);
+        });
     }
 
     public static void main(String[] args) {
@@ -66,18 +74,16 @@ public class Game extends JPanel {
         frame.setSize(CANVAS_SIZE_X, CANVAS_SIZE_Y);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+
         while (true) {
             game.moveBall();
             game.repaint();
             try {
                 Thread.sleep(10);
-            
 
-} catch (InterruptedException ex) {
-                Logger.getLogger(Game.class  
-
-.getName()).log(Level.SEVERE, null, ex);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Game.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
         }
 
