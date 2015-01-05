@@ -33,16 +33,20 @@ public class Game extends JPanel {
     int xa = 1;
     int ya = 1;
 
-    List<Bird> birdcage;
+    Birds birdcage;
 
     public Game() {
-        this.birdcage = new ArrayList<>();
-        this.birdcage.add(new Bird(100, 200, 0.1, 2, 30, 30));
-        this.birdcage.add(new Bird(50, 50, 1.2, 2, 15, 15));
+        birdcage.add(new Bird(100, 200, 0.1, 2, 30, 30));
+        birdcage.add(new Bird(50, 50, 1.2, 2, 15, 15));
+        birdcage.add(new Bird(50, 50, 1, 2.2, 15, 15));
+        birdcage.add(new Bird(50, 50, 1.2, 2.5, 15, 15));
+        birdcage.add(new Bird(50, 50, 1.1, 2.1, 15, 15));
+        birdcage.add(new Bird(50, 50, 1.2, 2, 15, 15));
+        birdcage.add(new Bird(50, 50, 1.5, 2.5, 15, 15));
     }
 
     public void moveBall() {
-        birdcage.stream().forEach((bird) -> {
+        birdcage.contents().stream().forEach((bird) -> {
             bird.move(this.getWidth(), this.getHeight());
         });//        if (x >= (this.getWidth() - (OBJECT_1_SIZE_X)) || x < 0){
 //            xa = xa * -1;
@@ -62,7 +66,7 @@ public class Game extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setColor(Color.red);
-        birdcage.stream().forEach((bird) -> {
+        birdcage.contents().stream().forEach((bird) -> {
             g2d.fillOval(bird.getLoc_x(), bird.getLoc_y(), bird.size_x, bird.size_y);
         });
     }
