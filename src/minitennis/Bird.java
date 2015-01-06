@@ -5,6 +5,7 @@
  */
 package minitennis;
 
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,30 +31,37 @@ public class Bird {
         this.size_y = size_y;
     }
 
-    Bird() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void paint(Graphics2D g2d){
+        g2d.fillOval(this.getLoc_x(), this.getLoc_y(), this.size_x, this.size_y);
     }
-
-    public void move(int width, int height) {
-        if ((loc_x >= (width - this.size_x)) || (loc_x <= 0)) {
+    public void move(int window_width, int window_height, Birds object_list) {
+        // Check for collision with window frame
+        if ((loc_x >= (window_width - this.size_x)) || (loc_x <= 0)) {
             xa = xa * -1;
             if (loc_x < 0) {
                 loc_x = 0;
-            } else if (loc_x > (width - this.size_x)) {
-                loc_x = (width - this.size_x);
+            } else if (loc_x > (window_width - this.size_x)) {
+                loc_x = (window_width - this.size_x);
             }
 
         }
-        if ((loc_y >= (height - this.size_y)) || (loc_y <= 0)) {
+        if ((loc_y >= (window_height - this.size_y)) || (loc_y <= 0)) {
             ya = ya * -1;
             if (loc_y < 0) {
                 loc_y = 0;
             }
-            if (loc_y > (height - this.size_y)) {
-                loc_y = (height - this.size_y);
+            if (loc_y > (window_height - this.size_y)) {
+                loc_y = (window_height - this.size_y);
             }
         }
 
+        // Check for collision with other objects
+        
+        
+        
+        
+        
+        
         loc_x = (this.loc_x + (1.0 * xa));
         //System.out.println("loc_x: " + loc_x );
         loc_y = (this.loc_y + (1.0 * ya));
@@ -75,21 +83,3 @@ public class Bird {
     }
 
 }
-//        if (loc_x >= (width - size_x) || loc_x <= 0) {
-//            xa = xa * -1.0;
-//            System.out.println("bounceX");
-//            if(loc_x < 0 ){
-//                loc_x = 0;
-//            }
-//        }
-//        if (loc_y >= (height - size_y) || loc_y <= 0) {
-//            ya = ya * -1.0;
-//            System.out.println("bounceY");
-//            if(loc_y < 0 ){
-//                loc_y = 0;
-//            }
-//
-//        }
-//        loc_x = (int) (loc_x + (1.0 * xa));
-//        loc_y = (int) (loc_y + (1.0 * ya));
-//    }

@@ -33,7 +33,8 @@ public class Game extends JPanel {
     int xa = 1;
     int ya = 1;
 
-    Birds birdcage;
+    Birds birdcage = new Birds();
+    
 
     public Game() {
         birdcage.add(new Bird(100, 200, 0.1, 2, 30, 30));
@@ -47,7 +48,7 @@ public class Game extends JPanel {
 
     public void moveBall() {
         birdcage.contents().stream().forEach((bird) -> {
-            bird.move(this.getWidth(), this.getHeight());
+            bird.move(this.getWidth(), this.getHeight(), this.birdcage);
         });//        if (x >= (this.getWidth() - (OBJECT_1_SIZE_X)) || x < 0){
 //            xa = xa * -1;
 //        }
@@ -67,7 +68,7 @@ public class Game extends JPanel {
                 RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setColor(Color.red);
         birdcage.contents().stream().forEach((bird) -> {
-            g2d.fillOval(bird.getLoc_x(), bird.getLoc_y(), bird.size_x, bird.size_y);
+            bird.paint(g2d);
         });
     }
 
