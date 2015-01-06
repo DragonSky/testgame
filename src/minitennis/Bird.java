@@ -6,8 +6,6 @@
 package minitennis;
 
 import java.awt.Graphics2D;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -31,9 +29,10 @@ public class Bird {
         this.size_y = size_y;
     }
 
-    public void paint(Graphics2D g2d){
+    public void paint(Graphics2D g2d) {
         g2d.fillOval(this.getLoc_x(), this.getLoc_y(), this.size_x, this.size_y);
     }
+
     public void move(int window_width, int window_height, Birds object_list) {
         // Check for collision with window frame
         if ((loc_x >= (window_width - this.size_x)) || (loc_x <= 0)) {
@@ -56,12 +55,6 @@ public class Bird {
         }
 
         // Check for collision with other objects
-        
-        
-        
-        
-        
-        
         loc_x = (this.loc_x + (1.0 * xa));
         //System.out.println("loc_x: " + loc_x );
         loc_y = (this.loc_y + (1.0 * ya));
@@ -82,4 +75,45 @@ public class Bird {
         return (int) loc_y;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + (int) (Double.doubleToLongBits(this.loc_x) ^ (Double.doubleToLongBits(this.loc_x) >>> 32));
+        hash = 79 * hash + (int) (Double.doubleToLongBits(this.loc_y) ^ (Double.doubleToLongBits(this.loc_y) >>> 32));
+        hash = 79 * hash + (int) (Double.doubleToLongBits(this.xa) ^ (Double.doubleToLongBits(this.xa) >>> 32));
+        hash = 79 * hash + (int) (Double.doubleToLongBits(this.ya) ^ (Double.doubleToLongBits(this.ya) >>> 32));
+        hash = 79 * hash + this.size_x;
+        hash = 79 * hash + this.size_y;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Bird other = (Bird) obj;
+        if (Double.doubleToLongBits(this.loc_x) != Double.doubleToLongBits(other.loc_x)) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.loc_y) != Double.doubleToLongBits(other.loc_y)) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.xa) != Double.doubleToLongBits(other.xa)) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.ya) != Double.doubleToLongBits(other.ya)) {
+            return false;
+        }
+        if (this.size_x != other.size_x) {
+            return false;
+        }
+        if (this.size_y != other.size_y) {
+            return false;
+        }
+        return true;
+    }
 }
