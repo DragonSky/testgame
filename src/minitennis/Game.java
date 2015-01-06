@@ -38,12 +38,12 @@ public class Game extends JPanel {
 
     public Game() {
         birdcage.add(new Bird(100, 200, 0.1, 2, 30, 30));
-        birdcage.add(new Bird(50, 50, 1.2, 2, 15, 15));
-        birdcage.add(new Bird(50, 50, 1, 2.2, 15, 15));
-        birdcage.add(new Bird(50, 50, 1.2, 2.5, 15, 15));
-        birdcage.add(new Bird(50, 50, 1.1, 2.1, 15, 15));
-        birdcage.add(new Bird(50, 50, 1.2, 2, 15, 15));
-        birdcage.add(new Bird(50, 50, 1.5, 2.5, 15, 15));
+        birdcage.add(new Bird(40, 50, 1.2, 2, 15, 15));
+        birdcage.add(new Bird(30, 50, 1, 2.2, 15, 15));
+        birdcage.add(new Bird(20, 50, 1.2, 2.5, 15, 15));
+        birdcage.add(new Bird(10, 50, 1.1, 2.1, 15, 15));
+        birdcage.add(new Bird(150, 50, 1.2, 2, 15, 15));
+        birdcage.add(new Bird(160, 50, 1.5, 2.5, 15, 15));
     }
 
     public void moveBall() {
