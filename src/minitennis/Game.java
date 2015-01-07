@@ -23,8 +23,8 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class Game extends JPanel {
 
-    static int CANVAS_SIZE_X = 300;
-    static int CANVAS_SIZE_Y = 400;
+    static int CANVAS_SIZE_X = 600;
+    static int CANVAS_SIZE_Y = 600;
     static int OBJECT_1_SIZE_X = 30;
     static int OBJECT_1_SIZE_Y = 30;
 
@@ -37,13 +37,13 @@ public class Game extends JPanel {
     
 
     public Game() {
-        birdcage.add(new Bird(100, 200, 0.1, 2, 30, 30));
-        birdcage.add(new Bird(40, 50, 1.2, 2, 15, 15));
-        birdcage.add(new Bird(30, 50, 1, 2.2, 15, 15));
-        birdcage.add(new Bird(20, 50, 1.2, 2.5, 15, 15));
-        birdcage.add(new Bird(10, 50, 1.1, 2.1, 15, 15));
-        birdcage.add(new Bird(150, 50, 1.2, 2, 15, 15));
-        birdcage.add(new Bird(160, 50, 1.5, 2.5, 15, 15));
+        birdcage.add(new Bird(200, 200, 0, 0, 100, 100));
+        birdcage.add(new Bird(300, 250, 2, 0, 15, 15));
+//        birdcage.add(new Bird(30, 50, 1, 2.2, 15, 15));
+//        birdcage.add(new Bird(20, 50, 1.2, 2.5, 15, 15));
+//        birdcage.add(new Bird(10, 50, 1.1, 2.1, 15, 15));
+//        birdcage.add(new Bird(150, 50, 1.2, 2, 15, 15));
+//        birdcage.add(new Bird(160, 50, 1.5, 2.5, 15, 15));
     }
 
     public void moveBall() {

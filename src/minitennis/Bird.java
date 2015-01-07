@@ -19,6 +19,7 @@ public class Bird {
     private double ya;
     public int size_x;
     public int size_y;
+    private int hitcount = 0;
 
     Bird(double loc_x, double loc_y, double xa, double ya, int size_x, int size_y) {
         this.loc_x = loc_x;
@@ -58,14 +59,39 @@ public class Bird {
         for (Bird bird : object_list.contents()) {
             if (bird != this) {
                 if (bird.collides_with(this)) {
-                    if (bird.collides_with_x(this)) {
-                        //System.out.println("x_collision");
-                        xa = xa * -1;
+                    System.out.println("Bang!");
+                    
+                    // see if this is a x+ collision
+                    if (((this.getLoc_x() + this.size_x) > bird.getLoc_x()) && this.getXa() > 0){
+                        System.out.println("Ping!");
+                        if (this.getXa() != 0){
+                        
+                            this.loc_x = bird.getLoc_x() - this.size_x;
+                        }
+                        
+                            this.setXa(xa * -1);
                     }
-
-                    if (bird.collides_with_y(this)) {
-                        ya = ya * -1;
+                    
+                    // see if this is a x- collision
+                    if ((this.getLoc_x() < bird.getLoc_x() + bird.size_x) && this.getXa() < 0){
+                        System.out.println("Ping!");
+                        if (this.getXa() != 0){
+                        
+                            this.loc_x = bird.getLoc_x() + bird.size_x ;
+                        }
+                        
+                            this.setXa(xa * -1);
                     }
+//                    if (bird.collides_with_x(this)) {
+//                        //System.out.println("x_collision");
+//                        this.loc_x = bird.getLoc_x() - this.size_x;
+//                        xa = xa * -1;
+//                        System.out.println("Ping!");
+//                    }
+//
+//                    if (bird.collides_with_y(this)) {
+//                        ya = ya * -1;
+//                    }
                 }
             }
         }
@@ -82,12 +108,42 @@ public class Bird {
                 && this.loc_x + this.size_x > other_bird.loc_x
                 && this.loc_y < other_bird.loc_y + other_bird.size_y
                 && this.size_y + this.loc_y > other_bird.loc_y;
+                
         }
 
     private boolean collides_with_x(Bird that) {
-        return true;
+        boolean result =  collides_with_plus_x(that); //|| collides_with_minus_x(that);
+        
+        return result;
+    }
         //return this.loc_x < that.loc_x && this.loc_x + this.size_x > that.loc_x;
                 
+    
+    
+    private boolean collides_with_plus_x(Bird that){
+        boolean result  //this object is moving right
+                = this.xa > 0 &&
+               //this object intercepts that object in the x axis 
+                this.getLoc_x() + this.size_x > that.getLoc_x();
+
+//                
+//                this.getLoc_x() + this.size_x >= that.getLoc_x() &&
+//                this.getLoc_y() + this.size_y >= that.getLoc_y() && 
+//                this.getLoc_y() + this.size_y <= that.getLoc_y() + that.size_x; 
+//                
+        
+                if (result){
+                    System.out.println("hit: " + hitcount );
+                    hitcount++;
+                    
+                }
+        
+                return result;
+        
+    }
+    
+    private boolean collides_with_minus_x(Bird that){
+        return false;
     }
 
     private boolean collides_with_y(Bird other_bird) {
@@ -108,6 +164,24 @@ public class Bird {
     public int getLoc_y() {
         return (int) loc_y;
     }
+
+    public double getXa() {
+        return xa;
+    }
+
+    public void setXa(double xa) {
+        this.xa = xa;
+    }
+
+    public double getYa() {
+        return ya;
+    }
+
+    public void setYa(double ya) {
+        this.ya = ya;
+    }
+    
+    
 
     @Override
     public int hashCode() {
